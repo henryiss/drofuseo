@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - Droposting</title>
+    <meta name="description" content="Hubungi tim Droposting untuk pertanyaan, bantuan, atau informasi lebih lanjut tentang plugin otomasi artikel WordPress.">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="images/droposting-logo.png" alt="Droposting Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/features.html">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/pricing.html">Harga</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#demo">Demo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/faq.html">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-2" href="#">Coba Gratis 5 Artikel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="bg-light py-3">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Kontak</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Contact Hero -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-5 fw-bold">Hubungi Kami</h1>
+                    <p class="lead">Tim dukungan kami siap membantu Anda dengan pertanyaan, masalah teknis, atau permintaan fitur baru.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Kirim Pesan</h2>
+                    <form onsubmit="handleFormSubmit(event, 'Kontak')">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subjek</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="" disabled selected>Pilih subjek pesan</option>
+                                <option value="support">Dukungan Teknis</option>
+                                <option value="billing">Pembayaran & Tagihan</option>
+                                <option value="feature">Permintaan Fitur</option>
+                                <option value="general">Pertanyaan Umum</option>
+                                <option value="business">Kemitraan Bisnis</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Informasi Kontak</h2>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center me-3">
+                                    <i class="bi bi-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5>Email</h5>
+                                    <p class="mb-0">support@droposting.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex mb-3">
+                                <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center me-3">
+                                    <i class="bi bi-clock"></i>
+                                </div>
+                                <div>
+                                    <h5>Jam Layanan</h5>
+                                    <p class="mb-0">Senin - Jumat, 09:00 - 17:00 WIB</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex">
+                                <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center me-3">
+                                    <i class="bi bi-globe"></i>
+                                </div>
+                                <div>
+                                    <h5>Alamat</h5>
+                                    <p class="mb-0">Jl. Teknologi Informasi No. 123, Jakarta, Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="mb-3">Pertanyaan Umum</h5>
+                            <p>Sebelum menghubungi kami, mungkin Anda ingin melihat bagian FAQ kami untuk jawaban atas pertanyaan umum:</p>
+                            <a href="/pages/faq.html" class="btn btn-outline-primary">Lihat FAQ</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="mb-3">Chat Langsung</h5>
+                            <p>Butuh bantuan segera? Gunakan fitur chat langsung kami:</p>
+                            <button class="btn btn-primary w-100">Mulai Chat Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="fw-bold mb-4">Jadwalkan Demo</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-8 mb-4 mb-md-0">
+                                    <h5>Ingin melihat Droposting dalam aksi?</h5>
+                                    <p class="mb-0">Jadwalkan sesi demo langsung dengan tim kami untuk melihat bagaimana Droposting bisa mengotomatiskan produksi artikel WordPress Anda.</p>
+                                </div>
+                                <div class="col-md-4 text-md-end">
+                                    <a href="#" class="btn btn-primary">Jadwalkan Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-2">Siap Meningkatkan Produksi Konten Anda?</h2>
+                    <p class="mb-0">Dapatkan 5 artikel gratis tanpa perlu kartu kredit. Coba sekarang dan rasakan perbedaannya.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="#" class="btn btn-light btn-lg fw-bold me-2">Coba Gratis 5 Artikel</a>
+                    <a href="#" class="btn btn-outline-light btn-lg">Jadwalkan Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Droposting</h5>
+                    <p>Plugin WordPress untuk otomasi artikel dengan AI. Terbitkan konten berkualitas dalam hitungan menit.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Produk</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Fitur</a></li>
+                        <li><a href="#" class="text-light">Harga</a></li>
+                        <li><a href="#" class="text-light">Template</a></li>
+                        <li><a href="#" class="text-light">Demo</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Perusahaan</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Tentang Kami</a></li>
+                        <li><a href="#" class="text-light">Blog</a></li>
+                        <li><a href="#" class="text-light">Karir</a></li>
+                        <li><a href="#" class="text-light">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Dukungan</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Panduan</a></li>
+                        <li><a href="#" class="text-light">FAQ</a></li>
+                        <li><a href="#" class="text-light">Dokumentasi</a></li>
+                        <li><a href="#" class="text-light">Kontak Support</a></li>
+                    </ul>
+                    <div class="mt-3">
+                        <form>
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Email Anda">
+                                <button class="btn btn-primary" type="submit">Ikut</button>
+                            </div>
+                            <small class="text-muted">Dapatkan update produk dan tips konten terbaru</small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6">
+                    <small class="text-muted">&copy; 2025 Droposting. Hak Cipta Dilindungi.</small>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light me-3">Kebijakan Privasi</a>
+                    <a href="#" class="text-light">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

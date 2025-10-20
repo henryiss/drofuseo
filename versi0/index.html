@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Droposting - Otomasi Artikel WordPress Dengan AI</title>
+    <meta name="description" content="Terbitkan artikel WordPress otomatis dalam hitungan menit. Lengkap dengan judul, konten, SEO meta, dan gambar.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Critical CSS inlined here for fast rendering -->
+    <style>
+        /* Critical above-the-fold CSS */
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            padding-top: 80px;
+        }
+        
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            background-color: white !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            margin-top: -80px;
+            padding-top: 120px;
+        }
+        
+        .btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-section {
+                padding-top: 100px;
+                text-align: center;
+            }
+        }
+    </style>
+    
+    <!-- Non-critical CSS loaded asynchronously -->
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </noscript>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="images/droposting-logo.png" alt="Droposting Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Harga</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#demo">Demo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-2" href="#">Coba Gratis 5 Artikel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section bg-primary text-white py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-4">Terbitkan Artikel WordPress Otomatis Dalam Hitungan Menit</h1>
+                    <p class="lead mb-4">Droposting menyiapkan judul, konten, SEO meta, dan gambar untuk Anda. Otomasi produksi artikel WordPress dengan AI tanpa perlu menulis manual.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#" class="btn btn-light btn-lg fw-bold">Coba Gratis 5 Artikel</a>
+                        <a href="#demo" class="btn btn-outline-light btn-lg">Lihat Demo</a>
+                    </div>
+                    <div class="mt-4">
+                        <small class="d-block">Terhubung langsung dengan WordPress • Konten lengkap dan siap tayang</small>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="images/hero-illustration.png" alt="Ilustrasi Otomatisasi Artikel WordPress" class="img-fluid" loading="lazy" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo/Social Proof Section -->
+    <section id="social-proof" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Dipercaya oleh Pengguna WordPress</h2>
+                <p class="text-muted">Bergabunglah dengan ribuan pengguna yang telah meningkatkan produktivitas konten mereka</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-2 col-4 d-flex align-items-center justify-content-center">
+                    <div class="logo-placeholder bg-white p-3 rounded shadow-sm text-center w-100">
+                        <span class="text-muted">Klien A</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4 d-flex align-items-center justify-content-center">
+                    <div class="logo-placeholder bg-white p-3 rounded shadow-sm text-center w-100">
+                        <span class="text-muted">Klien B</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4 d-flex align-items-center justify-content-center">
+                    <div class="logo-placeholder bg-white p-3 rounded shadow-sm text-center w-100">
+                        <span class="text-muted">Klien C</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4 d-flex align-items-center justify-content-center">
+                    <div class="logo-placeholder bg-white p-3 rounded shadow-sm text-center w-100">
+                        <span class="text-muted">Klien D</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4 d-flex align-items-center justify-content-center">
+                    <div class="logo-placeholder bg-white p-3 rounded shadow-sm text-center w-100">
+                        <span class="text-muted">Klien E</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4 d-flex align-items-center justify-content-center">
+                    <div class="logo-placeholder bg-white p-3 rounded shadow-sm text-center w-100">
+                        <span class="text-muted">Klien F</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="text-center">
+                        <p class="mb-1"><strong>"Droposting menghemat 10+ jam kerja saya setiap minggu"</strong></p>
+                        <p class="text-muted">- Andi Pratama, Publisher Berita Lokal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section id="problem-solution" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Produksi Konten Lebih Cepat Tanpa Kompromi Kualitas</h2>
+                <p class="text-muted">Solusi untuk tantangan produksi konten yang umum dihadapi</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="card-title">Produksi Konten Lambat</h3>
+                            <p class="card-text">Butuh waktu berjam-jam untuk menulis artikel berkualitas secara manual.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-warning bg-opacity-10 text-warning rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+                            <h3 class="card-title">Kualitas Tidak Konsisten</h3>
+                            <p class="card-text">Kualitas artikel bervariasi tergantung kondisi penulis saat itu.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-info bg-opacity-10 text-info rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-person-workspace"></i>
+                            </div>
+                            <h3 class="card-title">Proses Manual Melelahkan</h3>
+                            <p class="card-text">Harus menulis, optimasi SEO, upload gambar secara terpisah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-success border-2 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-lightning"></i>
+                            </div>
+                            <h3 class="card-title">Artikel Siap Tayang</h3>
+                            <p class="card-text">Artikel lengkap dengan judul, konten, SEO meta, dan gambar dalam hitungan menit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-success border-2 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <h3 class="card-title">Jadwal Teratur</h3>
+                            <p class="card-text">Jadwalkan publikasi artikel sesuai kebutuhan tanpa perlu ada di depan komputer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-success border-2 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-images"></i>
+                            </div>
+                            <h3 class="card-title">Gambar Otomatis</h3>
+                            <p class="card-text">Gambar yang relevan secara otomatis disertakan dalam artikel Anda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Fitur Unggulan Droposting</h2>
+                <p class="text-muted">Solusi otomasi konten WordPress yang lengkap dan mudah digunakan</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-file-text" style="font-size: 2rem;"></i>
+                            </div>
+                            <h4 class="card-title">Generator Artikel Otomatis</h4>
+                            <p class="card-text">Buat artikel lengkap dengan judul, konten, SEO meta, dan gambar hanya dengan memasukkan topik.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-layout-wtf" style="font-size: 2rem;"></i>
+                            </div>
+                            <h4 class="card-title">Template Pintar</h4>
+                            <p class="card-text">Atur preferensi audience, negara, call-to-action, dan panjang artikel sesuai kebutuhan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-clock-history" style="font-size: 2rem;"></i>
+                            </div>
+                            <h4 class="card-title">Antrean Publish</h4>
+                            <p class="card-text">Jadwalkan artikel untuk diterbitkan secara otomatis atau tayangkan secara instan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-circle bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="bi bi-graph-up" style="font-size: 2rem;"></i>
+                            </div>
+                            <h4 class="card-title">Lisensi & Paket</h4>
+                            <p class="card-text">Monitor kuota artikel Anda dan upgrade paket dengan mudah sesuai kebutuhan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Cara Kerja Droposting</h2>
+                <p class="text-muted">Hanya dalam 4 langkah sederhana, Anda bisa otomasi produksi artikel WordPress</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 text-center">
+                        <div class="card-body">
+                            <div class="step-circle bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <span class="fw-bold">1</span>
+                            </div>
+                            <h4 class="card-title">Daftar Trial</h4>
+                            <p class="card-text">Buat akun dan dapatkan 5 artikel gratis. Install plugin di situs WordPress Anda.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 text-center">
+                        <div class="card-body">
+                            <div class="step-circle bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <span class="fw-bold">2</span>
+                            </div>
+                            <h4 class="card-title">Atur Template</h4>
+                            <p class="card-text">Buat template dengan preferensi audience, CTA, dan panjang artikel.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 text-center">
+                        <div class="card-body">
+                            <div class="step-circle bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <span class="fw-bold">3</span>
+                            </div>
+                            <h4 class="card-title">Masukkan Topik</h4>
+                            <p class="card-text">Pilih template dan masukkan topik artikel yang ingin Anda buat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 text-center">
+                        <div class="card-body">
+                            <div class="step-circle bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <span class="fw-bold">4</span>
+                            </div>
+                            <h4 class="card-title">Artikel Siap Tayang</h4>
+                            <p class="card-text">Artikel lengkap akan otomatis diterbitkan di situs WordPress Anda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#demo" class="btn btn-primary btn-lg">Lihat Demo Langsung</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Paket & Harga</h2>
+                <p class="text-muted">Pilihan paket sesuai kebutuhan produksi artikel Anda</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header text-center bg-white py-4 border-bottom-0">
+                            <h3 class="mb-0">Trial</h3>
+                            <h4 class="text-primary fw-bold">Gratis</h4>
+                            <p class="text-muted">Coba dulu, buktikan sendiri</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 5 Artikel Gratis</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Akses Penuh Fitur</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Generator Artikel Otomatis</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Template Pintar</li>
+                                <li class="mb-2 text-muted"><i class="bi bi-x-circle-fill me-2"></i> Jadwal Publikasi</li>
+                                <li class="mb-2 text-muted"><i class="bi bi-x-circle-fill me-2"></i> Dukungan Prioritas</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Coba Gratis Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-primary border-2 shadow-sm position-relative">
+                        <div class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">
+                            Paling Banyak Digunakan
+                        </div>
+                        <div class="card-header text-center bg-white py-4 border-bottom-0">
+                            <h3 class="mb-0">BASIC30</h3>
+                            <h4 class="text-primary fw-bold">Rp 149.000<span class="fs-6">/bulan</span></h4>
+                            <p class="text-muted">30 artikel per bulan</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 30 Artikel/Bulan</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Akses Penuh Fitur</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Generator Artikel Otomatis</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Template Pintar</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Jadwal Publikasi</li>
+                                <li class="mb-2 text-muted"><i class="bi bi-x-circle-fill me-2"></i> Dukungan Prioritas</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100">Mulai Berlangganan</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header text-center bg-white py-4 border-bottom-0">
+                            <h3 class="mb-0">PRO60</h3>
+                            <h4 class="text-primary fw-bold">Rp 249.000<span class="fs-6">/bulan</span></h4>
+                            <p class="text-muted">60 artikel per bulan</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 60 Artikel/Bulan</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Akses Penuh Fitur</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Generator Artikel Otomatis</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Template Pintar</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Jadwal Publikasi</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Dukungan Prioritas</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Mulai Berlangganan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Template Gallery Section -->
+    <section id="template-gallery" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Galeri Template & Contoh Artikel</h2>
+                <p class="text-muted">Lihat berbagai template dan contoh artikel yang dihasilkan oleh Droposting</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-img-top p-3 bg-light text-center" style="height: 200px;">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center h-100">
+                                <span class="text-muted">Contoh Template 1</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Template Teknologi</h5>
+                            <p class="card-text">Template untuk artikel tentang teknologi dan inovasi terbaru.</p>
+                            <a href="#" class="btn btn-outline-primary">Gunakan Template Ini</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-img-top p-3 bg-light text-center" style="height: 200px;">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center h-100">
+                                <span class="text-muted">Contoh Template 2</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Template Bisnis</h5>
+                            <p class="card-text">Template untuk artikel tentang dunia bisnis dan kewirausahaan.</p>
+                            <a href="#" class="btn btn-outline-primary">Gunakan Template Ini</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-img-top p-3 bg-light text-center" style="height: 200px;">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center h-100">
+                                <span class="text-muted">Contoh Template 3</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Template Kesehatan</h5>
+                            <p class="card-text">Template untuk artikel tentang kesehatan dan gaya hidup sehat.</p>
+                            <a href="#" class="btn btn-outline-primary">Gunakan Template Ini</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">Lihat Semua Template</a>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Apa Kata Pengguna Droposting</h2>
+                    <p class="text-muted">Pengalaman nyata dari pengguna yang menggunakan Droposting untuk otomasi konten</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text">"Sejak menggunakan Droposting, saya bisa fokus ke hal lain dalam bisnis saya. Produksi artikel jadi otomatis tanpa mengurangi kualitas."</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-light rounded-circle" style="width: 50px; height: 50px;"></div>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">Budi Santoso</h5>
+                                        <p class="mb-0 text-muted">Pemilik Blog Teknologi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text">"Plugin ini benar-benar menghemat waktu kami. Dulu tim konten menghabiskan 5 jam sehari untuk menulis. Sekarang hanya 1 jam untuk review."</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-light rounded-circle" style="width: 50px; height: 50px;"></div>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">Dewi Lestari</h5>
+                                        <p class="mb-0 text-muted">Pemilik Agensi Digital</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text">"Kualitas artikel yang dihasilkan sangat baik. Pembaca kami tidak tahu bahwa sebagian besar artikel dibuat otomatis dengan AI."</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-light rounded-circle" style="width: 50px; height: 50px;"></div>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">Andi Pratama</h5>
+                                        <p class="mb-0 text-muted">Publisher Berita Lokal</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Use Cases Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Cocok Untuk Berbagai Kebutuhan</h2>
+                    <p class="text-muted">Bagaimana berbagai jenis pengguna memanfaatkan Droposting</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm text-center">
+                            <div class="card-body">
+                                <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-building" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h4>Agensi SEO</h4>
+                                <p class="text-muted">Membantu klien produksi artikel berkualitas dengan cepat</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm text-center">
+                            <div class="card-body">
+                                <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-newspaper" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h4>Publisher Niche</h4>
+                                <p class="text-muted">Memproduksi konten berkala secara otomatis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm text-center">
+                            <div class="card-body">
+                                <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-shop" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h4>Marketplace Blog</h4>
+                                <p class="text-muted">Menyediakan artikel berkualitas untuk penjual</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm text-center">
+                            <div class="card-body">
+                                <div class="icon-circle bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-buildings" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h4>Corporate Blog</h4>
+                                <p class="text-muted">Menyediakan konten edukatif untuk karyawan dan pelanggan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Pertanyaan Umum</h2>
+                    <p class="text-muted">Temukan jawaban atas pertanyaan umum seputar penggunaan Droposting</p>
+                </div>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                Bagaimana cara mencoba Droposting secara gratis?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Anda bisa mencoba Droposting secara gratis dengan mendaftar untuk paket trial. Anda akan mendapatkan 5 artikel gratis untuk diuji coba tanpa perlu kartu kredit.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                Apakah Droposting bisa digunakan di semua situs WordPress?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Ya, Droposting kompatibel dengan semua instalasi WordPress self-hosted. Plugin ini tidak bekerja di platform WordPress.com karena keterbatasan akses.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                Bagaimana dengan lisensi dan kuota artikel?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Lisensi Droposting hanya untuk satu domain. Kuota artikel akan direset otomatis setiap bulan sesuai paket berlangganan Anda. Anda bisa mengupgrade atau downgrade paket kapan saja.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                Apakah saya masih bisa mengedit artikel setelah dibuat?
+                            </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Tentu! Artikel yang dibuat dengan Droposting disimpan sebagai draft WordPress biasa. Anda bisa mengedit, memperbaiki, atau menyesuaikan dengan kebutuhan Anda sebelum diterbitkan.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                                Bagaimana kualitas artikel yang dihasilkan?
+                            </button>
+                        </h2>
+                        <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Artikel yang dihasilkan menggunakan teknologi AI terbaru dan dirancang untuk SEO. Namun, kami merekomendasikan untuk selalu meninjau artikel sebelum publikasi untuk memastikan relevansi dengan audience Anda.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#" class="btn btn-outline-primary">Lihat FAQ Lengkap</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="py-5 bg-primary text-white">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <h2 class="fw-bold mb-2">Siap Meningkatkan Produksi Konten Anda?</h2>
+                        <p class="mb-0">Dapatkan 5 artikel gratis tanpa perlu kartu kredit. Coba sekarang dan rasakan perbedaannya.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a href="#" class="btn btn-light btn-lg fw-bold me-2">Coba Gratis 5 Artikel</a>
+                        <a href="#" class="btn btn-outline-light btn-lg">Jadwalkan Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h5 class="fw-bold">Droposting</h5>
+                        <p>Plugin WordPress untuk otomasi artikel dengan AI. Terbitkan konten berkualitas dalam hitungan menit.</p>
+                        <div class="social-icons">
+                            <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="text-light me-2"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-4 mb-md-0">
+                        <h5 class="fw-bold">Produk</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Fitur</a></li>
+                            <li><a href="#" class="text-light">Harga</a></li>
+                            <li><a href="#" class="text-light">Template</a></li>
+                            <li><a href="#" class="text-light">Demo</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 mb-4 mb-md-0">
+                        <h5 class="fw-bold">Perusahaan</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Tentang Kami</a></li>
+                            <li><a href="#" class="text-light">Blog</a></li>
+                            <li><a href="#" class="text-light">Karir</a></li>
+                            <li><a href="#" class="text-light">Kontak</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="fw-bold">Dukungan</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Panduan</a></li>
+                            <li><a href="#" class="text-light">FAQ</a></li>
+                            <li><a href="#" class="text-light">Dokumentasi</a></li>
+                            <li><a href="#" class="text-light">Kontak Support</a></li>
+                        </ul>
+                        <div class="mt-3">
+                            <form>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Email Anda">
+                                    <button class="btn btn-primary" type="submit">Ikut</button>
+                                </div>
+                                <small class="text-muted">Dapatkan update produk dan tips konten terbaru</small>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4 bg-secondary">
+                <div class="row">
+                    <div class="col-md-6">
+                        <small class="text-muted">&copy; 2025 Droposting. Hak Cipta Dilindungi.</small>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#" class="text-light me-3">Kebijakan Privasi</a>
+                        <a href="#" class="text-light">Syarat & Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JS -->
+        <script src="js/main.js"></script>
+    </body>
+    </html>

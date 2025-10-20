@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Droposting - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../assets/logo.svg" alt="Droposting Logo">
+            </a>
+            <button class="menu-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="features.html">Fitur</a></li>
+                    <li><a href="pricing.html">Harga</a></li>
+                    <li><a href="how-it-works.html">Cara Kerja</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="#" class="login-link">Login</a>
+                <a href="#" class="cta-button button-primary">Mulai Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-login-section">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle">// AKSES AKUN ANDA</span>
+                    <h2>Selamat Datang Kembali!</h2>
+                    <p class="hero-login-description">Silakan masuk ke dashboard Anda untuk mengelola otomatisasi konten.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="login-area" class="login-area-section">
+            <div class="container">
+                <div class="login-card">
+                    <h3>Masuk ke Dashboard</h3>
+                    <p>Klik tombol di bawah untuk diarahkan ke portal pengguna atau instalasi plugin Anda.</p>
+                    <a href="#" class="cta-button button-primary-large">Pergi ke Dashboard</a>
+                    <div class="forgot-access">
+                        <p>Lupa akses? <a href="#">Hubungi dukungan kami</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="closing-cta-section">
+            <div class="container">
+                <h2>Belum Punya Akun?</h2>
+                <p>Daftar sekarang dan mulai otomatisasi konten Anda secara gratis.</p>
+                <a href="#" class="cta-button button-primary-large">Daftar Gratis</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h5 class="footer-heading">Droposting</h5>
+                    <p class="footer-text">Otomasi konten WordPress untuk publisher cerdas.</p>
+                </div>
+                <div class="footer-col">
+                    <h5 class="footer-heading">Tautan</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="how-it-works.html">Cara Kerja</a></li>
+                        <li><a href="template-library.html">Template</a></li>
+                        <li><a href="resources.html">Sumber Daya</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Dokumentasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 class="footer-heading">Legal</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <div class="footer-copyright">Copyright &copy; Droposting 2025</div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">Twitter</a>
+                    <a href="#" class="social-icon">Facebook</a>
+                    <a href="#" class="social-icon">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            const navLinks = document.querySelectorAll('.main-nav a');
+
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('main-nav--open');
+                    menuToggle.classList.toggle('main-nav--open');
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (mainNav.classList.contains('main-nav--open')) {
+                            mainNav.classList.remove('main-nav--open');
+                            menuToggle.classList.remove('main-nav--open');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

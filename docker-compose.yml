@@ -1,0 +1,263 @@
+version: "3.9"
+
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: web-traefik
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+    restart: "no"
+    networks:
+      - webnet
+
+  db:
+    image: mariadb:10.5
+    container_name: web-mariadb
+    environment:
+      TZ: Asia/Jakarta
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    ports:
+      - "40406:3306"
+    restart: "no"
+    networks:
+      - webnet
+
+  web:
+    build: ./php-apache
+    container_name: web-apache-php83
+    depends_on:
+      - db
+      - swagger
+    volumes:
+      - ./html:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+      APACHE_DOCUMENT_ROOT: /var/www/html/portalapi/public
+    restart: "no"
+    networks:
+      webnet:
+        aliases:
+          - portal.local
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.portal.rule: Host(`portal.local`)
+      traefik.http.routers.portal.entrypoints: web
+      traefik.http.services.portal.loadbalancer.server.port: "80"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: web-phpmyadmin
+    depends_on:
+      - db
+    environment:
+      TZ: Asia/Jakarta
+      PMA_HOST: db
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: "no"
+    networks:
+      - webnet
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.pma.rule: Host(`pma.local`)
+      traefik.http.routers.pma.entrypoints: web
+      traefik.http.services.pma.loadbalancer.server.port: "80"
+
+  swagger:
+    image: swaggerapi/swagger-ui:latest
+    container_name: web-swagger
+    environment:
+      TZ: Asia/Jakarta
+      SWAGGER_JSON: /foo/openapi.yaml
+    volumes:
+      - ./html/portalapi/openapi.yaml:/foo/openapi.yaml:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: "no"
+    networks:
+      - webnet
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.swagger-portal.rule: Host(`portal.local`) && PathPrefix(`/docs`)
+      traefik.http.routers.swagger-portal.entrypoints: web
+      traefik.http.services.swagger-portal.loadbalancer.server.port: "8080"
+
+  web-scanpjk:
+    build: ./php-apache
+    container_name: web-apache-php83-scanpjk
+    depends_on:
+      - db
+      - swagger-scanpjk
+    volumes:
+      - ./html:/var/www/html
+      - ./php-apache/site/000-default-scanpjk.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+      APACHE_DOCUMENT_ROOT: /var/www/html/scanpjk
+    restart: "no"
+    networks:
+      webnet:
+        aliases:
+          - scanpjk.local
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.scanpjk.rule: Host(`scanpjk.local`)
+      traefik.http.routers.scanpjk.entrypoints: web
+      traefik.http.services.scanpjk.loadbalancer.server.port: "80"
+
+  swagger-scanpjk:
+    image: swaggerapi/swagger-ui:latest
+    container_name: web-swagger-scanpjk
+    environment:
+      TZ: Asia/Jakarta
+      SWAGGER_JSON: /foo/openapi.yaml
+    volumes:
+      - ./html/scanpjk/openapi.yaml:/foo/openapi.yaml:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: "no"
+    networks:
+      - webnet
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.swagger-scan.rule: Host(`scanpjk.local`) && PathPrefix(`/docs`)
+      traefik.http.routers.swagger-scan.entrypoints: web
+      traefik.http.services.swagger-scan.loadbalancer.server.port: "8080"
+
+  web-wordpress:
+    build: ./php-apache
+    container_name: web-wordpress
+    depends_on:
+      - db
+    volumes:
+      - ./html:/var/www/html
+      - ./php-apache/conf/php-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+      APACHE_DOCUMENT_ROOT: /var/www/html/wordpress
+    restart: "no"
+    networks:
+      webnet:
+        aliases:
+          - wpdroposting.local
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.wpdrop.rule: Host(`wpdroposting.local`)
+      traefik.http.routers.wpdrop.entrypoints: web
+      traefik.http.services.wpdrop.loadbalancer.server.port: "80"
+
+  web-droposting:
+    build: ./php-apache
+    container_name: web-apache-php83-droposting
+    depends_on:
+      - db
+      - swagger-droposting
+    volumes:
+      - ./html:/var/www/html
+      - ./php-apache/conf/php-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini:ro
+      - ./php-apache/site/000-default-droposting.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+      APACHE_DOCUMENT_ROOT: /var/www/html/droposting/public
+    restart: "no"
+    networks:
+      webnet:
+        aliases:
+          - droposting.local
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.dropo.rule: Host(`droposting.local`)
+      traefik.http.routers.dropo.entrypoints: web
+      traefik.http.services.dropo.loadbalancer.server.port: "80"
+
+  web-droposting-scheduler:
+    build: ./php-apache
+    container_name: web-apache-php83-droposting-scheduler
+    depends_on:
+      - db
+    working_dir: /var/www/html/droposting
+    command: bash -lc "php artisan schedule:work --verbose --no-interaction"
+    volumes:
+      - ./html:/var/www/html
+      - ./php-apache/site/000-default-droposting.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+    restart: "no"
+    networks:
+      - webnet
+
+  swagger-droposting:
+    image: swaggerapi/swagger-ui:latest
+    container_name: web-swagger-droposting
+    environment:
+      TZ: Asia/Jakarta
+      SWAGGER_JSON: /foo/openapi.yaml
+    volumes:
+      - ./html/droposting/openapi.yaml:/foo/openapi.yaml:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: "no"
+    networks:
+      - webnet
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.swagger-dropo.rule: Host(`droposting.local`) && PathPrefix(`/docs`)
+      traefik.http.routers.swagger-dropo.entrypoints: web
+      traefik.http.services.swagger-dropo.loadbalancer.server.port: "8080"
+
+  web-drofuseo:
+    build: ./php-apache
+    container_name: web-apache-php83-drofuseo
+    volumes:
+      - ./html:/var/www/html
+      - ./php-apache/conf/php-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini:ro
+      - ./php-apache/site/000-default-drofuseo.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: Asia/Jakarta
+      APACHE_DOCUMENT_ROOT: /var/www/html/drofuseo
+    restart: "no"
+    networks:
+      webnet:
+        aliases:
+          - drofuseo.local
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.drofuse.rule: Host(`drofuseo.local`)
+      traefik.http.routers.drofuse.entrypoints: web
+      traefik.http.services.drofuse.loadbalancer.server.port: "80"
+
+networks:
+  webnet:
+    driver: bridge

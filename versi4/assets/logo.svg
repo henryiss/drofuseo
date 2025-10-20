@@ -1,0 +1,5 @@
+<svg width="160" height="40" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="35" height="35" rx="8" fill="#2C3E50"/>
+  <path d="M12 10 L23 17 L12 24 Z" fill="#F39C12"/>
+  <text x="45" y="25" font-family="Montserrat, sans-serif" font-size="18" font-weight="700" fill="#2C3E50">Droposting</text>
+</svg>

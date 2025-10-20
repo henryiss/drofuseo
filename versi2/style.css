@@ -1,0 +1,352 @@
+/* Global Styles & Variables */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #F5A623;
+    --dark-text: #333333;
+    --light-text: #FFFFFF;
+    --background-light: #FFFFFF;
+    --background-soft: #f8f9fa;
+    --border-color: #e0e0e0;
+    --font-main: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--dark-text);
+    background-color: var(--background-light);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-top: 0;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+h3 { font-size: 1.4rem; }
+
+section {
+    padding: 80px 0;
+}
+
+/* Buttons */
+.cta-button {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.main-header {
+    background-color: var(--background-light);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 35px;
+    display: block;
+}
+
+.main-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav li {
+    margin: 0 15px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--background-soft);
+    padding: 100px 0;
+}
+
+.hero-section .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    max-width: 500px;
+}
+
+.hero-cta {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.hero-image {
+    flex: 1;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Social Proof */
+.social-proof-section {
+    background-color: var(--background-light);
+    padding: 40px 0;
+    text-align: center;
+}
+
+.social-proof-section p {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+/* Problem-Solution Section */
+.problem-solution-section {
+    background-color: var(--background-soft);
+}
+
+.problem-solution-section .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.problem-solution-section .card {
+    background: var(--background-light);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Features Section */
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.feature-item h3 {
+    border-left: 3px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+/* How It Works */
+.how-it-works-section {
+    background-color: var(--background-soft);
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.step span {
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    font-weight: 700;
+    margin: 0 auto 15px;
+}
+
+/* Pricing Section */
+.pricing-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.tier {
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tier.recommended {
+    border-color: var(--primary-color);
+    border-width: 2px;
+    transform: scale(1.05);
+}
+
+.tier .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.tier ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.tier li {
+    margin-bottom: 10px;
+}
+
+/* Testimonials */
+.testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.testimonial-card {
+    background-color: var(--background-soft);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.testimonial-card footer {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+/* FAQ Section */
+.faq-list {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.faq-list details {
+    background: var(--background-soft);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.faq-list summary {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Closing CTA */
+.closing-cta-section {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    text-align: center;
+}
+
+.closing-cta-section h2 { color: var(--light-text); }
+.closing-cta-section .button-primary {
+    background-color: var(--light-text);
+    color: var(--primary-color);
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--dark-text);
+    color: var(--light-text);
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--light-text);
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+
+    .main-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-section .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content p { margin: 0 auto; }
+
+    .problem-solution-section .cards,
+    .feature-list,
+    .pricing-tiers,
+    .testimonial-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

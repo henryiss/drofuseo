@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #6f42c1;
+    --primary-rgb: 111, 66, 193;
+    --dark-bg: #1a1a2e;
+    --dark-card: #1f233d;
+    --light-text: #e0e0e0;
+    --muted-text: #a0a0c0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.navbar {
+    transition: background-color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: white;
+}
+
+.feature {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 4rem;
+    font-size: 2rem;
+    background-color: rgba(var(--primary-rgb), 0.1) !important;
+    color: var(--primary-color) !important;
+}
+
+.step-icon {
+    position: relative;
+}
+
+/* Responsive timeline for larger screens */
+@media (min-width: 768px) {
+    .step-icon::after {
+        content: '';
+        position: absolute;
+        top: 2rem; /* Vertically center with the icon */
+        left: 50%;
+        width: 100%;
+        height: 2px;
+        background-color: var(--dark-card); /* A light grey line */
+        z-index: -1;
+    }
+
+    .row .col-md-3:last-child .step-icon::after {
+        display: none; /* Don't draw a line after the last step */
+    }
+}
+
+/* Custom Accordion Styles for Dark Theme */
+.accordion-button {
+    background-color: var(--dark-card);
+    color: var(--light-text);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--dark-bg);
+    color: var(--primary-color);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(var(--primary-rgb), 0.5);
+}
+
+.accordion-button::after {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
